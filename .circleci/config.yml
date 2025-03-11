@@ -3,26 +3,12 @@ version: 2.1
 jobs:
   say-hello:
     docker:
-      - image: cimg/base:2024.02
+      - image: cimg/base:2023.03
     steps:
       - checkout
-      - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
-
-  build:
-    docker:
-      - image: cimg/node:20.9
-    steps:
-      - checkout
-      - run:
-          name: "Build Project"
-          command: "npm install && npm run build"
+      - run: echo "Hello, World!"
 
 workflows:
-  build-and-test:
+  say-hello-workflow:
     jobs:
       - say-hello
-      - build:
-          requires:
-            - say-hello
