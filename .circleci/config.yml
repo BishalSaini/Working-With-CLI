@@ -1,20 +1,22 @@
 version: 2.1
 
 jobs:
-  build:
+  one:
     docker:
-      - image: cimg/node:18.17  # Use a Node.js Docker image
+      - image: cimg/base:2023.03
     steps:
-      - checkout  # Check out the code from the repository
-      - run:
-          name: Install Dependencies
-          command: npm install  # Install dependencies
-      - run:
-          name: Run Tests
-          command: npm test  # Run tests (assuming you have a test script in package.json)
+      - checkout
+      - run: echo "This is job one"
+
+  two:
+    docker:
+      - image: cimg/base:2023.03
+    steps:
+      - checkout
+      - run: echo "This is job two"
 
 workflows:
-  version: 2.1
-  build-and-test:
+  one_and_two:
     jobs:
-      - build
+      - one
+      - two
