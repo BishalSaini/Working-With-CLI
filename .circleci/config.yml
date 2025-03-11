@@ -1,14 +1,20 @@
 version: 2.1
 
 jobs:
-  say-hello:
+  build:
     docker:
-      - image: cimg/base:2023.03
+      - image: cimg/node:18.17  # Use a Node.js Docker image
     steps:
-      - checkout
-      - run: echo "Hello, World!"
+      - checkout  # Check out the code from the repository
+      - run:
+          name: Install Dependencies
+          command: npm install  # Install dependencies
+      - run:
+          name: Run Tests
+          command: npm test  # Run tests (assuming you have a test script in package.json)
 
 workflows:
-  say-hello-workflow:
+  version: 2.1
+  build-and-test:
     jobs:
-      - say-hello
+      - build
